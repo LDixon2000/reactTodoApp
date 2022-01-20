@@ -20,7 +20,7 @@ taskRoutes.route('/task').get(function (req, res) {
 taskRoutes.route('/task/add').post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
-        task_author: 'leon',
+        task_author: req.body.task_text,
         task_text: req.body.task_text
     };
     db_connect.collection('tasks').insertOne(myobj, function (err, res) {
@@ -28,5 +28,15 @@ taskRoutes.route('/task/add').post(function (req, response) {
         response.json(res);
     })
 })
+
+taskRoutes.route('/:id').delete((req, response) => {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId( req.params.id )};
+    db_connect.collection('tasks').deleteOne(myquery, function (err, obj) {
+        if (err) throw err;
+        console.log('1 document deleted');
+        response.status(obj);
+    });
+});
 
 module.exports = taskRoutes;
