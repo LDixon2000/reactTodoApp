@@ -10,9 +10,10 @@ function Task(props) {
     <Flex alignItems='center' py='2'>
       <Box cursor='pointer' className="" onClick={() => toggleCompletion(!isCompleted)} flex='1 0 0'>
         <Text textDecorationLine={isCompleted ? 'line-through' : ''} fontSize='xl' whiteSpace='initial'>{text}</Text>
+        {id}
       </Box>
       <Box>
-        <Button onClick={() => deleteTask(id)} colorScheme="red">
+        <Button onClick={deleteTask(id)} colorScheme="red">
           <DeleteIcon />
         </Button>
       </Box>

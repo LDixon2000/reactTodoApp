@@ -3,7 +3,7 @@ import AddTask from "./AddTask";
 import Tasks from "./Tasks";
 import { Box, Heading, VStack } from "@chakra-ui/react";
 
-function Todo() {
+const Todo = () => {
   const [tasks, editTasks] = useState([]);
 
   useEffect(() => {
@@ -25,15 +25,17 @@ function Todo() {
   }, [tasks.length]);
 
   async function deleteTask(id) {
-      console.log('test')
     await fetch(`http://localhost:5001/${id}`, {
         method: 'DELETE'
     })
+
+    const newTasks = tasks.filter((el) => el._id !== id);
+    editTasks(newTasks);
   }
 
   async function addTask(text) {
     const newTask = { task_author: 'leon', task_text: text };
-    editTasks([...tasks, newTask]);
+    
     await fetch("http://localhost:5001/task/add", {
       method: "POST",
       headers: {
@@ -44,6 +46,8 @@ function Todo() {
       window.alert(error);
       return;
     });
+
+    editTasks([...tasks, newTask]);
   }
 
   return (
