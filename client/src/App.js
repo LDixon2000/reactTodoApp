@@ -1,4 +1,4 @@
-import Todo from "./components/Todo";
+import Todo from "./Pages/Todo";
 import { Center, Container } from "@chakra-ui/react";
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
     <Container maxW="container.md">
       <Center>
         <Todo />
-      </Center>
+      </Center>{" "}
     </Container>
   );
 }

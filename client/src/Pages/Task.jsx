@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Button, Box, Flex, Text } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 
+
+
 function Task(props) {
-  const { deleteTask, id, text } = props;
+  const { id, text, dispatch } = props;
   const [isCompleted, toggleCompletion] = useState(false);
   
   return (
@@ -13,7 +15,7 @@ function Task(props) {
         {id}
       </Box>
       <Box>
-        <Button onClick={deleteTask(id)} colorScheme="red">
+        <Button onClick={async () => await dispatch('DELETE_TASK', id)} colorScheme="red">
           <DeleteIcon />
         </Button>
       </Box>

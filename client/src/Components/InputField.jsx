@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Input } from '@chakra-ui/react';
 
 function InputField(props) {
-    const {inputType, addTask} = props;
+    const {inputType, dispatch} = props;
     const [inputValue, setInputValue] = useState('')
 
     function handleChange(event) {
@@ -10,8 +10,8 @@ function InputField(props) {
     }
 
     async function handleKeyPress(event) {
-        if (event.key === 'Enter'){
-            await addTask(inputValue);
+        if (event.key === 'Enter' && inputValue !== ''){
+            await dispatch('INSERT_TASK', { text : inputValue});
             setInputValue('');
         }
     }
